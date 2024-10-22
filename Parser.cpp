@@ -1,8 +1,7 @@
 #include "Parser.h"
-#include <QDebug>
-#include <QEventLoop>
 
-Parser::Parser(QObject *parent) : QObject(parent), timer_(new QTimer(this)) {
+
+Parser::Parser(QObject *parent) : QObject(parent) {
 }
 void Parser::writeValue(const QString& X1, const QString& Y1, const QString& R1, const QString& X2, const QString& Y2, const QString& R2)
 {
@@ -46,10 +45,10 @@ void Parser::resetBasic(){
 
     }
     else {
-        M1.SetX(this->basicO1.X);
-        M1.SetY(this->basicO1.Y);
-        M2.SetX(this->basicO2.X);
-        M2.SetY(this->basicO2.Y);
+        M1.SetX(basicO1.X);
+        M1.SetY(basicO1.Y);
+        M2.SetX(basicO2.X);
+        M2.SetY(basicO2.Y);
         coords();
     }
 }
@@ -61,15 +60,6 @@ double Parser::dist(const Manipulator& M, const Point& p) {
     return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
-void Parser::printPoints (Manipulator& m1, Manipulator& m2, std::string& strm1, std::string& strm2){
-    std::ostringstream ss;
-    ss.str("");
-    ss << "{" << m1.GetX() << ", " << m1.GetY() << "} ";
-    strm1 += ss.str();
-    ss.str("");
-    ss << "{" << m2.GetX() << ", " << m2.GetY() << "} ";
-    strm2 += ss.str();
-}
 void Parser::start(Manipulator& m1, Manipulator& m2) {
 
     std::string path = "points.txt";
